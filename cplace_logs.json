@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1583231687355,
+  "iteration": 1583232091647,
   "links": [],
   "panels": [
     {
@@ -27,20 +27,20 @@
           "value": "@timestamp"
         },
         {
-          "text": "level",
-          "value": "level"
-        },
-        {
-          "text": "kubernetes.namespace_name",
-          "value": "kubernetes.namespace_name"
-        },
-        {
-          "text": "kubernetes.labels.app_kubernetes_io/instance",
-          "value": "kubernetes.labels.app_kubernetes_io/instance"
+          "text": "level_value",
+          "value": "level_value"
         },
         {
           "text": "kubernetes.pod_name",
           "value": "kubernetes.pod_name"
+        },
+        {
+          "text": "buildInfo.repoName",
+          "value": "buildInfo.repoName"
+        },
+        {
+          "text": "buildInfo.release",
+          "value": "buildInfo.release"
         },
         {
           "text": "logger_name",
@@ -56,6 +56,7 @@
         }
       ],
       "datasource": null,
+      "description": "",
       "fontSize": "100%",
       "gridPos": {
         "h": 28,
@@ -68,16 +69,74 @@
       "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": 8,
-        "desc": false
+        "col": 0,
+        "desc": true
       },
       "styles": [
         {
           "alias": "Time",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "link": false,
           "pattern": "Time",
           "type": "date"
+        },
+        {
+          "alias": "Log Level",
+          "align": "auto",
+          "colorMode": "value",
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "level_value",
+          "thresholds": [
+            "20000",
+            "30000",
+            "40000"
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "text": "Debug",
+              "value": "10000"
+            },
+            {
+              "text": "Info",
+              "value": "20000"
+            },
+            {
+              "text": "Warning",
+              "value": "30000"
+            },
+            {
+              "text": "Error",
+              "value": "40000"
+            }
+          ]
+        },
+        {
+          "alias": "K8S Pod Name",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "kubernetes.pod_name",
+          "sanitize": true,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
         }
       ],
       "targets": [
@@ -234,6 +293,7 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -321,5 +381,5 @@
   "timezone": "browser",
   "title": "cplace Application Logs",
   "uid": null,
-  "version": 2
+  "version": 3
 }
