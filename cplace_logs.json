@@ -12,11 +12,12 @@
       }
     ]
   },
+  "description": "cplace Application Logs",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1583226059066,
+  "iteration": 1583231687355,
   "links": [],
   "panels": [
     {
@@ -177,8 +178,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "tags": [],
           "text": "anothercplace",
           "value": "anothercplace"
         },
@@ -209,6 +208,16 @@
             "selected": false,
             "text": "mycplace",
             "value": "mycplace"
+          },
+          {
+            "selected": false,
+            "text": "review",
+            "value": "review"
+          },
+          {
+            "selected": false,
+            "text": "review-cplace",
+            "value": "review-cplace"
           }
         ],
         "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
@@ -225,20 +234,20 @@
       {
         "allValue": null,
         "current": {
-          "text": "ERROR",
+          "text": "All",
           "value": [
-            "ERROR"
+            "$__all"
           ]
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10}",
+        "definition": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10,\"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance\"}",
         "hide": 0,
         "includeAll": true,
         "label": "Log Level",
         "multi": true,
         "name": "level",
         "options": [],
-        "query": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10}",
+        "query": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10,\"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance\"}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -257,14 +266,14 @@
           "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"level.keyword:$level\"}",
+        "definition": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
         "hide": 0,
         "includeAll": true,
         "label": "Logger Name",
         "multi": false,
         "name": "logger",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"level.keyword:$level\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -277,7 +286,12 @@
       },
       {
         "datasource": null,
-        "filters": [],
+        "filters": [
+          {
+            "condition": "",
+            "key": ""
+          }
+        ],
         "hide": 0,
         "label": "",
         "name": "Filters",
@@ -307,5 +321,5 @@
   "timezone": "browser",
   "title": "cplace Application Logs",
   "uid": null,
-  "version": 1
+  "version": 2
 }
