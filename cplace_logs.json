@@ -7,7 +7,10 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
         "name": "Annotations & Alerts",
+        "showIn": 0,
+        "tags": [],
         "type": "dashboard"
       }
     ]
@@ -17,9 +20,243 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1583232091647,
+  "iteration": 1583335062821,
   "links": [],
   "panels": [
+    {
+      "cacheTimeout": null,
+      "columns": [
+        {
+          "text": "Total",
+          "value": "total"
+        }
+      ],
+      "datasource": null,
+      "fontSize": "90%",
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "interval": "",
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "pluginVersion": "6.6.2",
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "kubernetes.labels.app_kubernetes_io/instance.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 10,
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "es_time",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "count"
+            }
+          ],
+          "query": "kubernetes.namespace_name.keyword:$namespace",
+          "refId": "A",
+          "timeField": "es_time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Logs per Instance",
+      "transform": "timeseries_aggregations",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "aliasColors": {
+        "ERROR": "semi-dark-red",
+        "Error": "red",
+        "INFO": "light-green",
+        "Information": "green",
+        "WARN": "semi-dark-yellow",
+        "Warning": "yellow"
+      },
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "decimals": 0,
+      "description": "Chart for incoming logs by level",
+      "fill": 5,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 20,
+        "x": 3,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "interval": "",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.6.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "level.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 5,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "es_time",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "select metric",
+              "id": "1",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
+              "type": "count"
+            }
+          ],
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob}",
+          "refId": "D",
+          "timeField": "es_time"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
     {
       "columns": [
         {
@@ -35,14 +272,6 @@
           "value": "kubernetes.pod_name"
         },
         {
-          "text": "buildInfo.repoName",
-          "value": "buildInfo.repoName"
-        },
-        {
-          "text": "buildInfo.release",
-          "value": "buildInfo.release"
-        },
-        {
           "text": "logger_name",
           "value": "logger_name"
         },
@@ -53,20 +282,36 @@
         {
           "text": "message",
           "value": "message"
+        },
+        {
+          "text": "buildInfo.repoName",
+          "value": "buildInfo.repoName"
+        },
+        {
+          "text": "buildInfo.release",
+          "value": "buildInfo.release"
         }
       ],
       "datasource": null,
       "description": "",
-      "fontSize": "100%",
+      "fontSize": "80%",
       "gridPos": {
-        "h": 28,
+        "h": 26,
         "w": 23,
         "x": 0,
-        "y": 0
+        "y": 6
       },
       "id": 2,
+      "links": [
+        {
+          "title": "",
+          "url": ""
+        }
+      ],
       "options": {},
       "pageSize": null,
+      "repeat": null,
+      "repeatDirection": "h",
       "showHeader": true,
       "sort": {
         "col": 0,
@@ -75,14 +320,14 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "align": "left",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss.SSS",
           "link": false,
-          "pattern": "Time",
+          "pattern": "@timestamp",
           "type": "date"
         },
         {
-          "alias": "Log Level",
+          "alias": "Level",
           "align": "auto",
           "colorMode": "value",
           "colors": [
@@ -95,9 +340,8 @@
           "mappingType": 1,
           "pattern": "level_value",
           "thresholds": [
-            "20000",
-            "30000",
-            "40000"
+            "20001",
+            "30001"
           ],
           "type": "string",
           "unit": "short",
@@ -117,6 +361,10 @@
             {
               "text": "Error",
               "value": "40000"
+            },
+            {
+              "text": "N/A",
+              "value": "null"
             }
           ]
         },
@@ -131,9 +379,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
+          "link": false,
           "mappingType": 1,
           "pattern": "kubernetes.pod_name",
-          "sanitize": true,
+          "sanitize": false,
           "thresholds": [],
           "type": "string",
           "unit": "short"
@@ -142,6 +391,7 @@
       "targets": [
         {
           "bucketAggs": [],
+          "hide": false,
           "metrics": [
             {
               "field": "select field",
@@ -153,18 +403,19 @@
               "type": "raw_document"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob}",
           "refId": "A",
           "timeField": "es_time"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Logs",
+      "title": "Log Table",
       "transform": "json",
       "type": "table"
     }
   ],
+  "refresh": false,
   "schemaVersion": 22,
   "style": "dark",
   "tags": [
@@ -255,8 +506,8 @@
           },
           {
             "selected": false,
-            "text": "cplace",
-            "value": "cplace"
+            "text": "board",
+            "value": "board"
           },
           {
             "selected": false,
@@ -267,16 +518,6 @@
             "selected": false,
             "text": "mycplace",
             "value": "mycplace"
-          },
-          {
-            "selected": false,
-            "text": "review",
-            "value": "review"
-          },
-          {
-            "selected": false,
-            "text": "review-cplace",
-            "value": "review-cplace"
           }
         ],
         "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
@@ -293,7 +534,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -326,42 +566,48 @@
           "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
+        "definition": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 200, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
         "hide": 0,
         "includeAll": true,
         "label": "Logger Name",
         "multi": false,
         "name": "logger",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 100, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 200, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 5,
-        "tagValuesQuery": "",
+        "tagValuesQuery": "cf.cplace.*",
         "tags": [],
-        "tagsQuery": "",
+        "tagsQuery": "logger_name",
         "type": "query",
         "useTags": false
       },
       {
-        "datasource": null,
-        "filters": [
+        "current": {
+          "selected": true,
+          "text": "*",
+          "value": "*"
+        },
+        "hide": 0,
+        "label": "Search",
+        "name": "filter",
+        "options": [
           {
-            "condition": "",
-            "key": ""
+            "selected": true,
+            "text": "*",
+            "value": "*"
           }
         ],
-        "hide": 0,
-        "label": "",
-        "name": "Filters",
+        "query": "*",
         "skipUrlSync": false,
-        "type": "adhoc"
+        "type": "textbox"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -381,5 +627,5 @@
   "timezone": "browser",
   "title": "cplace Application Logs",
   "uid": null,
-  "version": 3
+  "version": 4
 }
