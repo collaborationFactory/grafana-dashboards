@@ -16,4 +16,5 @@ The data is scraped by Prometheus from each cplace instance by calling the prome
 When a new dashboard version is exported from Grafana, please ensure:
 
 * Set uid key to **null**: ```"uid": null,```
+* Empty filter options: ```"options": [],```
 * Ensure version key is incremented

@@ -20,7 +20,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1583335062821,
+  "iteration": 1583408647736,
   "links": [],
   "panels": [
     {
@@ -258,6 +258,55 @@
       }
     },
     {
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 12,
+        "w": 23,
+        "x": 0,
+        "y": 6
+      },
+      "id": 10,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "es_time",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "logs"
+            }
+          ],
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob}",
+          "refId": "A",
+          "timeField": "es_time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Log Panel",
+      "type": "logs"
+    },
+    {
       "columns": [
         {
           "text": "@timestamp",
@@ -299,19 +348,12 @@
         "h": 26,
         "w": 23,
         "x": 0,
-        "y": 6
+        "y": 18
       },
       "id": 2,
-      "links": [
-        {
-          "title": "",
-          "url": ""
-        }
-      ],
       "options": {},
       "pageSize": null,
       "repeat": null,
-      "repeatDirection": "h",
       "showHeader": true,
       "sort": {
         "col": 0,
@@ -379,7 +421,6 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "link": false,
           "mappingType": 1,
           "pattern": "kubernetes.pod_name",
           "sanitize": false,
@@ -437,43 +478,7 @@
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
-        "options": [
-          {
-            "selected": false,
-            "text": "default",
-            "value": "default"
-          },
-          {
-            "selected": true,
-            "text": "dev",
-            "value": "dev"
-          },
-          {
-            "selected": false,
-            "text": "ingress-nginx",
-            "value": "ingress-nginx"
-          },
-          {
-            "selected": false,
-            "text": "kube-system",
-            "value": "kube-system"
-          },
-          {
-            "selected": false,
-            "text": "kubernetes-dashboard",
-            "value": "kubernetes-dashboard"
-          },
-          {
-            "selected": false,
-            "text": "logging",
-            "value": "logging"
-          },
-          {
-            "selected": false,
-            "text": "qa",
-            "value": "qa"
-          }
-        ],
+        "options": [],
         "query": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\"}",
         "refresh": 0,
         "regex": "",
@@ -488,8 +493,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "anothercplace",
-          "value": "anothercplace"
+          "selected": false,
+          "text": "",
+          "value": ""
         },
         "datasource": "elasticsearch",
         "definition": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
@@ -498,28 +504,7 @@
         "label": "Instance",
         "multi": false,
         "name": "instance",
-        "options": [
-          {
-            "selected": true,
-            "text": "anothercplace",
-            "value": "anothercplace"
-          },
-          {
-            "selected": false,
-            "text": "board",
-            "value": "board"
-          },
-          {
-            "selected": false,
-            "text": "grafana",
-            "value": "grafana"
-          },
-          {
-            "selected": false,
-            "text": "mycplace",
-            "value": "mycplace"
-          }
-        ],
+        "options": [],
         "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
         "refresh": 0,
         "regex": "",
@@ -627,5 +612,5 @@
   "timezone": "browser",
   "title": "cplace Application Logs",
   "uid": null,
-  "version": 4
+  "version": 5
 }
