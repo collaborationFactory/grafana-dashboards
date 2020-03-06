@@ -4,7 +4,7 @@
       {
         "builtIn": 1,
         "datasource": "-- Grafana --",
-        "enable": true,
+        "enable": false,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "limit": 100,
@@ -20,7 +20,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1583408647772,
+  "iteration": 1583481411087,
   "links": [],
   "panels": [
     {
@@ -129,7 +129,7 @@
       "datasource": null,
       "decimals": 0,
       "description": "Chart for incoming logs by level",
-      "fill": 0,
+      "fill": 5,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
@@ -171,6 +171,35 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "Debug",
+          "bucketAggs": [
+            {
+              "field": "es_time",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "select metric",
+              "id": "1",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
+              "type": "count"
+            }
+          ],
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:DEBUG AND logger_name:$logger AND ${filter:glob}",
+          "refId": "D",
+          "timeField": "es_time"
+        },
+        {
           "alias": "Info",
           "bucketAggs": [
             {
@@ -187,7 +216,7 @@
           "hide": false,
           "metrics": [
             {
-              "field": "status_code",
+              "field": "select metric",
               "id": "1",
               "meta": {},
               "pipelineAgg": "select metric",
@@ -195,8 +224,8 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob} AND level:INFO",
-          "refId": "D",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:INFO AND logger_name:$logger AND ${filter:glob}",
+          "refId": "A",
           "timeField": "es_time"
         },
         {
@@ -213,15 +242,19 @@
               "type": "date_histogram"
             }
           ],
+          "hide": false,
           "metrics": [
             {
-              "field": "select field",
+              "field": "select metric",
               "id": "1",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob} AND level:WARN",
-          "refId": "A",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:WARN AND logger_name:$logger AND ${filter:glob}",
+          "refId": "B",
           "timeField": "es_time"
         },
         {
@@ -238,39 +271,18 @@
               "type": "date_histogram"
             }
           ],
+          "hide": false,
           "metrics": [
             {
-              "field": "select field",
+              "field": "select metric",
               "id": "1",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob} AND level:ERROR",
-          "refId": "B",
-          "timeField": "es_time"
-        },
-        {
-          "alias": "Debug",
-          "bucketAggs": [
-            {
-              "field": "es_time",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "select field",
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob} AND level:DEBUG",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:ERROR AND logger_name:$logger AND ${filter:glob}",
           "refId": "C",
           "timeField": "es_time"
         }
@@ -319,55 +331,6 @@
       }
     },
     {
-      "datasource": null,
-      "description": "",
-      "gridPos": {
-        "h": 12,
-        "w": 23,
-        "x": 0,
-        "y": 6
-      },
-      "id": 10,
-      "options": {
-        "showLabels": true,
-        "showTime": true,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "es_time",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "select field",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "logs"
-            }
-          ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance",
-          "refId": "A",
-          "timeField": "es_time"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "All Logs for selected instance",
-      "type": "logs"
-    },
-    {
       "columns": [
         {
           "text": "@timestamp",
@@ -409,7 +372,7 @@
         "h": 26,
         "w": 23,
         "x": 0,
-        "y": 18
+        "y": 6
       },
       "id": 2,
       "options": {},
@@ -698,7 +661,7 @@
         "name": "filter",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "*",
             "value": "*"
           }
@@ -710,7 +673,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
