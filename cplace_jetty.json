@@ -17,9 +17,9 @@
   "description": "cplace HTTP Access Dashboard",
   "editable": true,
   "gnetId": null,
-  "id": null,
   "graphTooltip": 0,
-  "iteration": 1583841030175,
+  "id": 9,
+  "iteration": 1583859190993,
   "links": [
     {
       "icon": "external link",
@@ -849,14 +849,14 @@
           "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"kubernetes.namespace_name=$namespace\"\n}",
+        "definition": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name=$namespace\"\n}",
         "hide": 0,
         "includeAll": true,
         "label": "Instance",
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"kubernetes.namespace_name=$namespace\"\n}",
+        "query": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name=$namespace\"\n}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -894,61 +894,13 @@
         "useTags": false
       },
       {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "2",
-          "value": "2"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "Response Time",
-        "multi": false,
-        "name": "responsetime",
-        "options": [
-          {
-            "selected": false,
-            "text": "1",
-            "value": "1"
-          },
-          {
-            "selected": true,
-            "text": "2",
-            "value": "2"
-          },
-          {
-            "selected": false,
-            "text": "3",
-            "value": "3"
-          },
-          {
-            "selected": false,
-            "text": "4",
-            "value": "4"
-          },
-          {
-            "selected": false,
-            "text": "5",
-            "value": "5"
-          },
-          {
-            "selected": false,
-            "text": "10",
-            "value": "10"
-          }
-        ],
-        "query": "1,2,3,4,5,10",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
         "auto": true,
         "auto_count": 100,
         "auto_min": "10s",
         "current": {
-          "selected": false,
-          "text": "30m",
-          "value": "30m"
+          "selected": true,
+          "text": "auto",
+          "value": "$__auto_interval_inter"
         },
         "datasource": null,
         "hide": 0,
@@ -958,7 +910,7 @@
         "name": "inter",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "auto",
             "value": "$__auto_interval_inter"
           },
@@ -993,7 +945,7 @@
             "value": "10m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "30m",
             "value": "30m"
           },
@@ -1072,5 +1024,5 @@
   "timezone": "browser",
   "title": "cplace HTTP Access",
   "uid": null,
-  "version": 2
+  "version": 3
 }
