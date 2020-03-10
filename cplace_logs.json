@@ -19,7 +19,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": null,
   "iteration": 1583481411087,
   "links": [],
   "panels": [
@@ -502,43 +502,7 @@
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
-        "options": [
-          {
-            "selected": false,
-            "text": "default",
-            "value": "default"
-          },
-          {
-            "selected": true,
-            "text": "dev",
-            "value": "dev"
-          },
-          {
-            "selected": false,
-            "text": "ingress-nginx",
-            "value": "ingress-nginx"
-          },
-          {
-            "selected": false,
-            "text": "kube-system",
-            "value": "kube-system"
-          },
-          {
-            "selected": false,
-            "text": "kubernetes-dashboard",
-            "value": "kubernetes-dashboard"
-          },
-          {
-            "selected": false,
-            "text": "logging",
-            "value": "logging"
-          },
-          {
-            "selected": false,
-            "text": "qa",
-            "value": "qa"
-          }
-        ],
+        "options": [],
         "query": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\"}",
         "refresh": 0,
         "regex": "",
@@ -564,28 +528,7 @@
         "label": "Instance",
         "multi": false,
         "name": "instance",
-        "options": [
-          {
-            "selected": false,
-            "text": "board",
-            "value": "board"
-          },
-          {
-            "selected": false,
-            "text": "board2",
-            "value": "board2"
-          },
-          {
-            "selected": false,
-            "text": "grafana",
-            "value": "grafana"
-          },
-          {
-            "selected": true,
-            "text": "mycplace",
-            "value": "mycplace"
-          }
-        ],
+        "options": [],
         "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
         "refresh": 0,
         "regex": "",

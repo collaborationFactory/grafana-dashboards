@@ -28,9 +28,9 @@
   },
   "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
   "editable": true,
-  "gnetId": 4701,
+  "gnetId": null,
   "graphTooltip": 1,
-  "id": 7,
+  "id": null,
   "iteration": 1583216454469,
   "links": [],
   "panels": [
