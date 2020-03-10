@@ -3,7 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": "elasticsearch",
         "enable": false,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -19,8 +19,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1583481411087,
+  "iteration": 1583858723414,
   "links": [],
   "panels": [
     {
@@ -31,7 +30,7 @@
           "value": "total"
         }
       ],
-      "datasource": null,
+      "datasource": "elasticsearch",
       "fontSize": "90%",
       "gridPos": {
         "h": 6,
@@ -42,7 +41,6 @@
       "id": 8,
       "interval": "",
       "links": [],
-      "options": {},
       "pageSize": null,
       "pluginVersion": "6.6.2",
       "showHeader": true,
@@ -72,11 +70,12 @@
         {
           "bucketAggs": [
             {
+              "$$hashKey": "object:26663",
               "fake": true,
               "field": "kubernetes.labels.app_kubernetes_io/instance.keyword",
               "id": "3",
               "settings": {
-                "min_doc_count": 10,
+                "min_doc_count": 1000,
                 "order": "desc",
                 "orderBy": "_count",
                 "size": "10"
@@ -84,7 +83,8 @@
               "type": "terms"
             },
             {
-              "field": "es_time",
+              "$$hashKey": "object:26664",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -96,6 +96,7 @@
           ],
           "metrics": [
             {
+              "$$hashKey": "object:26661",
               "field": "select field",
               "id": "1",
               "meta": {},
@@ -103,9 +104,9 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:$namespace",
+          "query": "kubernetes.namespace_name:${namespace} AND level_value!=null",
           "refId": "A",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         }
       ],
       "timeFrom": null,
@@ -126,7 +127,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "elasticsearch",
       "decimals": 0,
       "description": "Chart for incoming logs by level",
       "fill": 5,
@@ -174,7 +175,8 @@
           "alias": "Debug",
           "bucketAggs": [
             {
-              "field": "es_time",
+              "$$hashKey": "object:27641",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -187,6 +189,7 @@
           "hide": false,
           "metrics": [
             {
+              "$$hashKey": "object:27639",
               "field": "select metric",
               "id": "1",
               "meta": {},
@@ -195,15 +198,16 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:DEBUG AND logger_name:$logger AND ${filter:glob}",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:DEBUG AND logger_name:$logger AND ${filter:glob} AND level_value!=null",
           "refId": "D",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Info",
           "bucketAggs": [
             {
-              "field": "es_time",
+              "$$hashKey": "object:27645",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -216,6 +220,7 @@
           "hide": false,
           "metrics": [
             {
+              "$$hashKey": "object:27643",
               "field": "select metric",
               "id": "1",
               "meta": {},
@@ -224,15 +229,16 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:INFO AND logger_name:$logger AND ${filter:glob}",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:INFO AND logger_name:$logger AND ${filter:glob} AND level_value!=null",
           "refId": "A",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Warn",
           "bucketAggs": [
             {
-              "field": "es_time",
+              "$$hashKey": "object:27649",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -245,6 +251,7 @@
           "hide": false,
           "metrics": [
             {
+              "$$hashKey": "object:27647",
               "field": "select metric",
               "id": "1",
               "meta": {},
@@ -253,15 +260,16 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:WARN AND logger_name:$logger AND ${filter:glob}",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:WARN AND logger_name:$logger AND ${filter:glob} AND level_value!=null",
           "refId": "B",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Error",
           "bucketAggs": [
             {
-              "field": "es_time",
+              "$$hashKey": "object:27653",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -274,6 +282,7 @@
           "hide": false,
           "metrics": [
             {
+              "$$hashKey": "object:27651",
               "field": "select metric",
               "id": "1",
               "meta": {},
@@ -282,9 +291,9 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:ERROR AND logger_name:$logger AND ${filter:glob}",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:ERROR AND logger_name:$logger AND ${filter:glob} AND level_value!=null",
           "refId": "C",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -365,7 +374,7 @@
           "value": "buildInfo.release"
         }
       ],
-      "datasource": null,
+      "datasource": "elasticsearch",
       "description": "",
       "fontSize": "80%",
       "gridPos": {
@@ -375,7 +384,6 @@
         "y": 6
       },
       "id": 2,
-      "options": {},
       "pageSize": null,
       "repeat": null,
       "showHeader": true,
@@ -459,6 +467,7 @@
           "hide": false,
           "metrics": [
             {
+              "$$hashKey": "object:27763",
               "field": "select field",
               "id": "1",
               "meta": {},
@@ -468,9 +477,9 @@
               "type": "raw_document"
             }
           ],
-          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob}",
+          "query": "kubernetes.labels.app_kubernetes_io\\/instance:$instance AND level:$level AND logger_name:$logger AND ${filter:glob} AND level_value!=null",
           "refId": "A",
-          "timeField": "es_time"
+          "timeField": "@timestamp"
         }
       ],
       "timeFrom": null,
@@ -484,79 +493,28 @@
   "schemaVersion": 22,
   "style": "dark",
   "tags": [
+    "cplace",
     "logs"
   ],
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": "*",
         "current": {
-          "selected": true,
-          "text": "dev",
-          "value": "dev"
+          "selected": false,
+          "tags": [],
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\"}",
+        "definition": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\",\"query\":\"level_value!=null\"}",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
         "options": [],
-        "query": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\"}",
-        "refresh": 0,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "mycplace",
-          "value": "mycplace"
-        },
-        "datasource": "elasticsearch",
-        "definition": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Instance",
-        "multi": false,
-        "name": "instance",
-        "options": [],
-        "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
-        "refresh": 0,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 5,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": "elasticsearch",
-        "definition": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10,\"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Log Level",
-        "multi": true,
-        "name": "level",
-        "options": [],
-        "query": "{\"find\":\"terms\",\"field\":\"level.keyword\",\"size\": 10,\"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance\"}",
+        "query": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\",\"query\":\"level_value!=null\"}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -568,21 +526,75 @@
         "useTags": false
       },
       {
-        "allValue": null,
+        "allValue": ".*",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 200, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
+        "definition": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace\"\n}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Instance",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace\"\n}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "elasticsearch",
+        "definition": "{\n\"find\":\"terms\",\"field\":\"level.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace AND kubernetes.labels.app_kubernetes_io\\\\/instance:$instance\"\n}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Log Level",
+        "multi": true,
+        "name": "level",
+        "options": [],
+        "query": "{\n\"find\":\"terms\",\"field\":\"level.keyword\",\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace AND kubernetes.labels.app_kubernetes_io\\\\/instance:$instance\"\n}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "elasticsearch",
+        "definition": "{\n\"find\":\"terms\",\"field\":\"logger_name.keyword\",\n\"size\":200,\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace AND kubernetes.labels.app_kubernetes_io\\\\/instance:$instance AND level:$level\"\n}",
         "hide": 0,
         "includeAll": true,
         "label": "Logger Name",
         "multi": false,
         "name": "logger",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"logger_name.keyword\", \"size\": 200, \"query\":\"kubernetes.labels.app_kubernetes_io\\\\/instance.keyword:$instance AND level.keyword:$level\"}",
+        "query": "{\n\"find\":\"terms\",\"field\":\"logger_name.keyword\",\n\"size\":200,\n\"query\":\"level_value!=null AND kubernetes.namespace_name:$namespace AND kubernetes.labels.app_kubernetes_io\\\\/instance:$instance AND level:$level\"\n}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -604,7 +616,7 @@
         "name": "filter",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "*",
             "value": "*"
           }
@@ -636,5 +648,5 @@
   "timezone": "browser",
   "title": "cplace Application Logs",
   "uid": null,
-  "version": 6
+  "version": 7
 }
