@@ -131,7 +131,7 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -236,7 +236,7 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -314,7 +314,7 @@
               "type": "cardinality"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -425,7 +425,7 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null AND request_headers.user-agent!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND request_headers.user-agent!=null",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -569,7 +569,7 @@
               "type": "avg"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null AND elapsed_time!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND elapsed_time!=null",
           "refId": "B",
           "timeField": "@timestamp"
         }
@@ -794,7 +794,7 @@
               "type": "raw_document"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -816,16 +816,16 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": ".*",
         "current": {
           "selected": true,
-          "text": "qa",
-          "value": "qa"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "elasticsearch",
         "definition": "{\"find\":\"terms\", \"field\":\"kubernetes.namespace_name.keyword\",\"query\":\"requested_uri!=null\"}",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
@@ -844,19 +844,19 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": "cplace-master",
-          "value": "cplace-master"
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "elasticsearch",
-        "definition": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
+        "definition": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"kubernetes.namespace_name=$namespace\"\n}",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Instance",
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "{\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\"query\":\"kubernetes.namespace_name.keyword:$namespace\"}",
+        "query": "{\n\"find\":\"terms\",\"field\":\"kubernetes.labels.app_kubernetes_io/instance.keyword\",\n\"query\":\"kubernetes.namespace_name=$namespace\"\n}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1072,5 +1072,5 @@
   "timezone": "browser",
   "title": "cplace HTTP Access",
   "uid": null,
-  "version": 1
+  "version": 2
 }
