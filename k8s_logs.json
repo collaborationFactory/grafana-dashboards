@@ -19,7 +19,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 10,
-  "iteration": 1583942417857,
+  "iteration": 1583996052176,
   "links": [],
   "panels": [
     {
@@ -80,7 +80,7 @@
               "field": "time",
               "id": "2",
               "settings": {
-                "interval": "auto",
+                "interval": "10m",
                 "min_doc_count": 0,
                 "trimEdges": 0
               },
@@ -89,8 +89,17 @@
           ],
           "metrics": [
             {
-              "field": "select field",
+              "field": "select metric",
               "id": "1",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "pipelineVariables": [
+                {
+                  "name": "var1",
+                  "pipelineAgg": "select metric"
+                }
+              ],
+              "settings": {},
               "type": "count"
             }
           ],
@@ -215,8 +224,8 @@
   "schemaVersion": 22,
   "style": "dark",
   "tags": [
-    "k8s",
-    "metrics"
+    "logs",
+    "kubernetes"
   ],
   "templating": {
     "list": [
@@ -248,7 +257,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": ".*",
           "value": ".*"
         },
@@ -269,7 +278,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

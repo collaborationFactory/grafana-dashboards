@@ -19,15 +19,15 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 9,
-  "iteration": 1583859190993,
+  "iteration": 1583995038476,
   "links": [
     {
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "cplace",
+      "title": "Source",
       "type": "link",
-      "url": "https://www.collaboration-factory.de/"
+      "url": "https://github.com/collaborationFactory/grafana-dashboards"
     }
   ],
   "panels": [
@@ -54,6 +54,7 @@
       "dashes": false,
       "datasource": "elasticsearch",
       "decimals": 0,
+      "description": "Total requests in given Interval",
       "fill": 5,
       "fillGradient": 2,
       "gridPos": {
@@ -110,7 +111,7 @@
               "type": "terms"
             },
             {
-              "field": "@timestamp",
+              "field": "time",
               "id": "2",
               "settings": {
                 "interval": "$inter",
@@ -123,7 +124,7 @@
           "dsType": "elasticsearch",
           "metrics": [
             {
-              "field": "select metric",
+              "field": "status_code",
               "id": "1",
               "meta": {},
               "pipelineAgg": "select metric",
@@ -131,9 +132,9 @@
               "type": "count"
             }
           ],
-          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND _exists_:status_code",
           "refId": "A",
-          "timeField": "@timestamp"
+          "timeField": "time"
         }
       ],
       "thresholds": [],
@@ -170,7 +171,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -294,10 +295,10 @@
         {
           "bucketAggs": [
             {
-              "field": "@timestamp",
+              "field": "time",
               "id": "2",
               "settings": {
-                "interval": "auto",
+                "interval": "$inter",
                 "min_doc_count": 0,
                 "trimEdges": 0
               },
@@ -316,7 +317,7 @@
           ],
           "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
           "refId": "A",
-          "timeField": "@timestamp"
+          "timeField": "time"
         }
       ],
       "thresholds": [],
@@ -504,7 +505,7 @@
               "type": "terms"
             },
             {
-              "field": "@timestamp",
+              "field": "time",
               "id": "2",
               "settings": {
                 "interval": "$inter",
@@ -521,17 +522,23 @@
               "field": "elapsed_time",
               "id": "1",
               "meta": {
+                "avg": false,
+                "count": false,
+                "max": false,
+                "min": false,
+                "std_deviation": true,
                 "std_deviation_bounds_lower": true,
-                "std_deviation_bounds_upper": true
+                "std_deviation_bounds_upper": true,
+                "sum": false
               },
               "pipelineAgg": "select metric",
               "settings": {},
               "type": "extended_stats"
             }
           ],
-          "query": "kubernetes.namespace_name.keyword:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND status_code!=null AND elapsed_time!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"$instance\" AND _exists_:status_code AND _exists_:elapsed_time",
           "refId": "A",
-          "timeField": "@timestamp"
+          "timeField": "time"
         },
         {
           "bucketAggs": [
@@ -548,7 +555,7 @@
               "type": "terms"
             },
             {
-              "field": "@timestamp",
+              "field": "time",
               "id": "2",
               "settings": {
                 "interval": "$inter",
@@ -558,7 +565,7 @@
               "type": "date_histogram"
             }
           ],
-          "hide": false,
+          "hide": true,
           "metrics": [
             {
               "field": "elapsed_time",
@@ -569,9 +576,9 @@
               "type": "avg"
             }
           ],
-          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND elapsed_time!=null",
+          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND _exists_:status_code AND _exists_:elapsed_time",
           "refId": "B",
-          "timeField": "@timestamp"
+          "timeField": "time"
         }
       ],
       "thresholds": [],
@@ -619,7 +626,7 @@
       }
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -628,181 +635,182 @@
         "y": 27
       },
       "id": 38,
-      "panels": [],
-      "repeat": null,
-      "title": "Recent Request",
-      "type": "row"
-    },
-    {
-      "columns": [
+      "panels": [
         {
-          "text": "@timestamp",
-          "value": "@timestamp"
-        },
-        {
-          "text": "kubernetes.pod_name",
-          "value": "kubernetes.pod_name"
-        },
-        {
-          "text": "request_headers.x-forwarded-host",
-          "value": "request_headers.x-forwarded-host"
-        },
-        {
-          "text": "remote_host",
-          "value": "remote_host"
-        },
-        {
-          "text": "elapsed_time",
-          "value": "elapsed_time"
-        },
-        {
-          "text": "method",
-          "value": "method"
-        },
-        {
-          "text": "requested_uri",
-          "value": "requested_uri"
-        },
-        {
-          "text": "protocol",
-          "value": "protocol"
-        },
-        {
-          "text": "request_headers.x-forwarded-proto",
-          "value": "request_headers.x-forwarded-proto"
-        },
-        {
-          "text": "status_code",
-          "value": "status_code"
-        },
-        {
-          "text": "response_headers.content-length",
-          "value": "response_headers.content-length"
-        }
-      ],
-      "datasource": "elasticsearch",
-      "description": "Show 500 recent requests",
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 15,
-        "w": 24,
-        "x": 0,
-        "y": 28
-      },
-      "height": "500",
-      "id": 33,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": null,
-        "desc": false
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "/@time.*/",
-          "type": "date"
-        },
-        {
-          "alias": "Protocol (fwd)",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "request_headers.x-forwarded-proto",
-          "preserveFormat": false,
-          "sanitize": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Duration",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "elapsed_time",
-          "thresholds": [],
-          "type": "number",
-          "unit": "ms"
-        },
-        {
-          "alias": "Forwarded Host",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "request_headers.x-forwarded-host",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Client IP",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "remote_host",
-          "sanitize": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "bucketAggs": [],
-          "dsType": "elasticsearch",
-          "metrics": [
+          "columns": [
             {
-              "field": "select field",
-              "id": "1",
-              "meta": {},
-              "settings": {
-                "size": 500
-              },
-              "type": "raw_document"
+              "text": "@timestamp",
+              "value": "@timestamp"
+            },
+            {
+              "text": "kubernetes.pod_name",
+              "value": "kubernetes.pod_name"
+            },
+            {
+              "text": "request_headers.x-forwarded-host",
+              "value": "request_headers.x-forwarded-host"
+            },
+            {
+              "text": "remote_host",
+              "value": "remote_host"
+            },
+            {
+              "text": "elapsed_time",
+              "value": "elapsed_time"
+            },
+            {
+              "text": "method",
+              "value": "method"
+            },
+            {
+              "text": "requested_uri",
+              "value": "requested_uri"
+            },
+            {
+              "text": "protocol",
+              "value": "protocol"
+            },
+            {
+              "text": "request_headers.x-forwarded-proto",
+              "value": "request_headers.x-forwarded-proto"
+            },
+            {
+              "text": "status_code",
+              "value": "status_code"
+            },
+            {
+              "text": "response_headers.content-length",
+              "value": "response_headers.content-length"
             }
           ],
-          "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND status_code!=null AND NOT remote_host.keyword: /(192\\.168).*/",
-          "refId": "A",
-          "timeField": "@timestamp"
+          "datasource": "elasticsearch",
+          "description": "Show 500 recent requests  (excluding internal networks)",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 27,
+            "w": 24,
+            "x": 0,
+            "y": 28
+          },
+          "height": "500",
+          "id": 33,
+          "links": [],
+          "pageSize": 25,
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": null,
+            "desc": false
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "/@time.*/",
+              "type": "date"
+            },
+            {
+              "alias": "Protocol (fwd)",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "request_headers.x-forwarded-proto",
+              "preserveFormat": false,
+              "sanitize": false,
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Duration",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "elapsed_time",
+              "thresholds": [],
+              "type": "number",
+              "unit": "ms"
+            },
+            {
+              "alias": "Forwarded Host",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "request_headers.x-forwarded-host",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Client IP",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "remote_host",
+              "sanitize": false,
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "bucketAggs": [],
+              "dsType": "elasticsearch",
+              "metrics": [
+                {
+                  "field": "select field",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {
+                    "size": 500
+                  },
+                  "type": "raw_document"
+                }
+              ],
+              "query": "kubernetes.namespace_name:\"$namespace\" AND kubernetes.labels.app_kubernetes_io\\/instance:\"${instance}\" AND _exists_:status_code AND NOT remote_host.keyword: /(192\\.168).*/",
+              "refId": "A",
+              "timeField": "time"
+            }
+          ],
+          "title": "Logs",
+          "transform": "json",
+          "transparent": true,
+          "type": "table"
         }
       ],
-      "title": "Logs",
-      "transform": "json",
-      "transparent": true,
-      "type": "table"
+      "repeat": null,
+      "title": "Recent Request (external)",
+      "type": "row"
     }
   ],
   "refresh": false,
@@ -811,14 +819,15 @@
   "tags": [
     "cplace",
     "http",
-    "access"
+    "access",
+    "logs"
   ],
   "templating": {
     "list": [
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -898,7 +907,7 @@
         "auto_count": 100,
         "auto_min": "10s",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "auto",
           "value": "$__auto_interval_inter"
         },
@@ -993,7 +1002,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

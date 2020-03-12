@@ -18,9 +18,23 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1583941800983,
+  "iteration": 1583995348587,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Charts",
+      "type": "row"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -31,9 +45,9 @@
       "fillGradient": 1,
       "gridPos": {
         "h": 11,
-        "w": 22,
+        "w": 24,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "hiddenSeries": false,
       "id": 2,
@@ -71,14 +85,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(fluentbit_input_bytes_total[5m]))",
+          "expr": "avg(rate(fluentbit_input_bytes_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Input Bytes",
           "refId": "A"
         },
         {
-          "expr": "avg(rate(fluentbit_input_records_total[5m]))",
+          "expr": "avg(rate(fluentbit_input_records_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -140,9 +154,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 22,
+        "w": 24,
         "x": 0,
-        "y": 11
+        "y": 12
       },
       "hiddenSeries": false,
       "id": 4,
@@ -173,19 +187,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(fluentbit_output_errors_total[5m]))",
+          "expr": "avg(rate(fluentbit_output_errors_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "interval": "",
           "legendFormat": "Output Errors",
           "refId": "A"
         },
         {
-          "expr": "avg(rate(fluentbit_output_retries_total[5m]))",
+          "expr": "avg(rate(fluentbit_output_retries_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "interval": "",
           "legendFormat": "Output Retries",
           "refId": "B"
         },
         {
-          "expr": "avg(rate(fluentbit_output_retries_failed_total[5m]))",
+          "expr": "avg(rate(fluentbit_output_retries_failed_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "interval": "",
           "legendFormat": "Output Retries Failed",
           "refId": "C"
@@ -246,9 +260,9 @@
       "fillGradient": 1,
       "gridPos": {
         "h": 10,
-        "w": 22,
+        "w": 24,
         "x": 0,
-        "y": 19
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 6,
@@ -288,13 +302,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(fluentbit_filter_drop_records_total[5m]))",
+          "expr": "avg(rate(fluentbit_filter_drop_records_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "interval": "",
           "legendFormat": "Filter Drop Records",
           "refId": "B"
         },
         {
-          "expr": "avg(rate(fluentbit_filter_add_records_total[5m]))",
+          "expr": "avg(rate(fluentbit_filter_add_records_total{kubernetes_node=~\"^${node}$\"}[5m]))",
           "interval": "",
           "legendFormat": "Filter Add Records",
           "refId": "C"
@@ -342,72 +356,87 @@
       }
     },
     {
-      "columns": [
-        {
-          "text": "time",
-          "value": "time"
-        },
-        {
-          "text": "kubernetes.host",
-          "value": "kubernetes.host"
-        },
-        {
-          "text": "stream",
-          "value": "stream"
-        },
-        {
-          "text": "log",
-          "value": "log"
-        }
-      ],
-      "datasource": "elasticsearch",
-      "fontSize": "80%",
+      "collapsed": true,
+      "datasource": null,
       "gridPos": {
-        "h": 26,
-        "w": 22,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 29
+        "y": 30
       },
-      "id": 8,
-      "pageSize": 10,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
+      "id": 12,
+      "panels": [
         {
-          "alias": "Time",
-          "align": "left",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "time",
-          "type": "date"
-        }
-      ],
-      "targets": [
-        {
-          "bucketAggs": [],
-          "metrics": [
+          "columns": [
             {
-              "field": "select field",
-              "id": "1",
-              "meta": {},
-              "settings": {
-                "size": 500
-              },
-              "type": "raw_document"
+              "text": "time",
+              "value": "time"
+            },
+            {
+              "text": "kubernetes.host",
+              "value": "kubernetes.host"
+            },
+            {
+              "text": "stream",
+              "value": "stream"
+            },
+            {
+              "text": "log",
+              "value": "log"
             }
           ],
-          "query": "kubernetes.container_name=\"fluent-bit\"",
-          "refId": "A",
-          "timeField": "time"
+          "datasource": "elasticsearch",
+          "fontSize": "80%",
+          "gridPos": {
+            "h": 26,
+            "w": 22,
+            "x": 0,
+            "y": 31
+          },
+          "id": 8,
+          "pageSize": 10,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "left",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "time",
+              "type": "date"
+            }
+          ],
+          "targets": [
+            {
+              "bucketAggs": [],
+              "metrics": [
+                {
+                  "field": "select field",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {
+                    "size": 500
+                  },
+                  "type": "raw_document"
+                }
+              ],
+              "query": "kubernetes.container_name=\"fluent-bit\"",
+              "refId": "A",
+              "timeField": "time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Fluent-Bit logs",
+          "transform": "json",
+          "type": "table"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Fluent-Bit logs",
-      "transform": "json",
-      "type": "table"
+      "title": "Logs",
+      "type": "row"
     }
   ],
   "schemaVersion": 22,
@@ -421,19 +450,19 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(kube_pod_info{namespace=\"logging\"}, pod)",
+        "definition": "label_values({kubernetes_namespace=\"logging\"},kubernetes_node)",
         "hide": 0,
         "includeAll": true,
-        "label": "Pod",
+        "label": "Kubernetes Node",
         "multi": false,
-        "name": "pod",
+        "name": "node",
         "options": [],
-        "query": "label_values(kube_pod_info{namespace=\"logging\"}, pod)",
+        "query": "label_values({kubernetes_namespace=\"logging\"},kubernetes_node)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -447,7 +476,7 @@
     ]
   },
   "time": {
-    "from": "now-60m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

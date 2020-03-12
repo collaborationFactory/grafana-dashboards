@@ -19,8 +19,17 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1583927574667,
-  "links": [],
+  "iteration": 1583994829136,
+  "links": [
+    {
+      "icon": "doc",
+      "tags": [],
+      "title": "Source",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://github.com/collaborationFactory/grafana-dashboards"
+    }
+  ],
   "panels": [
     {
       "aliasColors": {
@@ -262,7 +271,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -287,7 +296,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": ".*",
           "value": ".*"
         },
