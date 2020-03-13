@@ -3,7 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": "Prometheus",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -14,7 +14,7 @@
       },
       {
         "datasource": "Prometheus",
-        "enable": true,
+        "enable": false,
         "expr": "resets(process_uptime_seconds{application=\"$application\", instance=\"$instance\"}[1m]) > 0",
         "iconColor": "rgba(255, 96, 96, 1)",
         "name": "Restart Detection",
@@ -26,17 +26,17 @@
       }
     ]
   },
-  "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
+  "description": "",
   "editable": true,
-  "gnetId": null,
+  "gnetId": 4701,
   "graphTooltip": 1,
-  "id": null,
-  "iteration": 1583216454469,
+  "id": 12,
+  "iteration": 1584090619034,
   "links": [],
   "panels": [
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -51,194 +51,97 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "rgba(245, 54, 54, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
+      "columns": [
+        {
+          "text": "Current",
+          "value": "current"
+        }
       ],
       "datasource": "Prometheus",
-      "decimals": 1,
-      "editable": true,
-      "error": false,
-      "format": "s",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
+      "fontSize": "100%",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 5,
+        "w": 6,
         "x": 0,
         "y": 1
       },
-      "height": "",
-      "id": 63,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "70%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "process_uptime_seconds{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "",
-          "metric": "",
-          "refId": "A",
-          "step": 14400
-        }
-      ],
-      "thresholds": "",
-      "title": "Uptime",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "rgba(245, 54, 54, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "Prometheus",
-      "decimals": null,
-      "editable": true,
-      "error": false,
-      "format": "dateTimeAsIso",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 1
-      },
-      "height": "",
       "id": 92,
-      "interval": null,
+      "interval": "",
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
+      "pageSize": 2,
+      "pluginVersion": "6.7.0-88f2de56pre",
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
         {
-          "name": "value to text",
-          "value": 1
+          "alias": "Up since",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "Current",
+          "thresholds": [],
+          "type": "number",
+          "unit": "dateTimeFromNow"
         },
         {
-          "name": "range to text",
-          "value": 2
+          "alias": "Pod",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
         }
       ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "70%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "process_start_time_seconds{application=\"$application\", instance=\"$instance\"}*1000",
+          "expr": "process_start_time_seconds{app_kubernetes_io_instance=~\"^${instance}$\"}*1000",
           "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{kubernetes_pod_name}}",
           "metric": "",
           "refId": "A",
           "step": 14400
         }
       ],
-      "thresholds": "",
-      "title": "Start time",
-      "type": "singlestat",
-      "valueFontSize": "70%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Started",
+      "transform": "timeseries_aggregations",
+      "type": "table"
     },
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorValue": true,
+      "colorValue": false,
       "colors": [
         "rgba(50, 172, 45, 0.97)",
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
       "datasource": "Prometheus",
-      "decimals": 2,
+      "decimals": 1,
       "editable": true,
       "error": false,
-      "format": "percent",
+      "format": "bytes",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -247,8 +150,8 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 5,
+        "w": 2,
         "x": 6,
         "y": 1
       },
@@ -269,7 +172,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -295,15 +197,16 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"})*100/sum(jvm_memory_max_bytes{application=\"$application\",instance=\"$instance\", area=\"nonheap\"})",
+          "expr": "avg(jvm_memory_bytes_used{app_kubernetes_io_instance=~\"^${instance}$\",area=\"nonheap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "",
           "refId": "A",
           "step": 14400
         }
       ],
-      "thresholds": "70,90",
+      "thresholds": "",
       "title": "Non-Heap used",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -331,7 +234,7 @@
         "rgba(245, 54, 54, 0.9)"
       ],
       "datasource": "Prometheus",
-      "decimals": 2,
+      "decimals": 1,
       "editable": true,
       "error": false,
       "format": "percent",
@@ -343,9 +246,9 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
+        "h": 5,
+        "w": 1,
+        "x": 8,
         "y": 1
       },
       "id": 65,
@@ -365,7 +268,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -386,8 +288,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"})*100/sum(jvm_memory_max_bytes{application=\"$application\",instance=\"$instance\", area=\"heap\"})",
+          "expr": "sum(jvm_memory_bytes_used{app_kubernetes_io_instance=~\"^${instance}$\",area=\"heap\"})*100 / sum(jvm_memory_bytes_max{app_kubernetes_io_instance=~\"^${instance}$\",area=\"heap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "",
           "refId": "A",
@@ -408,13 +311,70 @@
       "valueName": "current"
     },
     {
+      "datasource": "Prometheus",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 1
+      },
+      "id": 147,
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "title": "",
+            "unit": "percentunit"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.0-88f2de56pre",
+      "targets": [
+        {
+          "expr": "irate(process_cpu_seconds_total{app_kubernetes_io_instance=~\"^${instance}\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU",
+      "type": "bargauge"
+    },
+    {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 6
       },
       "id": 135,
       "panels": [],
@@ -429,7 +389,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "decimals": 2,
       "description": "cplace logins",
       "fill": 1,
@@ -438,7 +398,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 133,
@@ -526,7 +486,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "decimals": 2,
       "fill": 1,
       "fillGradient": 0,
@@ -534,7 +494,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 4
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 139,
@@ -615,35 +575,44 @@
       }
     },
     {
-      "aliasColors": {
-        "cplace: adminscript execution success": "green"
+      "collapsed": false,
+      "datasource": "Prometheus",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
       },
+      "id": 126,
+      "panels": [],
+      "repeat": null,
+      "title": "I/O Overview",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "decimals": 2,
-      "description": "",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 6,
+        "h": 8,
+        "w": 12,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "hiddenSeries": false,
-      "id": 141,
+      "id": 145,
       "legend": {
-        "alignAsTable": false,
         "avg": false,
-        "current": true,
-        "hideZero": true,
+        "current": false,
         "max": false,
         "min": false,
         "show": true,
-        "total": true,
-        "values": true
+        "total": false,
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -655,22 +624,52 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "/Rate/",
+          "bars": true
+        },
+        {
+          "alias": "/Active/"
+        },
+        {
+          "alias": "/Bytes/",
+          "yaxis": 2
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(cplace_adminscript_total{application=\"$application\", instance=\"$instance\"}[1m])",
-          "legendFormat": "cplace: adminscript {{type}} {{status}}",
+          "expr": "sum by (code,web_cplace_de_fqdn) (rate(jetty_requests_total{app_kubernetes_io_instance=~\"^$instance$\"}[5m]))",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{web_cplace_de_fqdn}} - Rate",
           "refId": "A"
+        },
+        {
+          "expr": "sum by (code,web_cplace_de_fqdn) (rate(jetty_responses_bytes_total{app_kubernetes_io_instance=~\"^$instance$\"}[5m]))",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{web_cplace_de_fqdn}} - Bytes",
+          "refId": "B"
+        },
+        {
+          "expr": "avg by (code,web_cplace_de_fqdn) (jetty_requests_active{app_kubernetes_io_instance=~\"^$instance$\"})",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{web_cplace_de_fqdn}} - Active",
+          "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "cplace Adminscripts (1m avg.)",
+      "title": "Jetty Requests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -686,6 +685,7 @@
       },
       "yaxes": [
         {
+          "decimals": 1,
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -694,7 +694,8 @@
           "show": true
         },
         {
-          "format": "short",
+          "decimals": 1,
+          "format": "bytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -708,47 +709,34 @@
       }
     },
     {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 16
-      },
-      "id": 126,
-      "panels": [],
-      "repeat": null,
-      "title": "I/O Overview",
-      "type": "row"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "decimals": 0,
+      "decimals": 2,
       "description": "",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 2,
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 17
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 119,
       "legend": {
         "alignAsTable": false,
-        "avg": false,
-        "current": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": false,
         "hideZero": true,
         "max": false,
         "min": false,
+        "rightSide": false,
         "show": true,
-        "total": true,
+        "total": false,
         "values": true
       },
       "lines": true,
@@ -768,49 +756,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "tomcat_threads_busy_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jetty_queued_thread_pool_threads{app_kubernetes_io_instance=~\"^$instance$\"}",
           "format": "time_series",
           "hide": false,
-          "intervalFactor": 2,
-          "legendFormat": "TOMCAT - BSY",
-          "refId": "A"
-        },
-        {
-          "expr": "tomcat_threads_current_threads{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 2,
-          "legendFormat": "TOMCAT - CUR",
-          "refId": "B"
-        },
-        {
-          "expr": "tomcat_threads_config_max_threads{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 2,
-          "legendFormat": "TOMCAT - MAX",
-          "refId": "C"
-        },
-        {
-          "expr": "jetty_threads_busy{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 2,
-          "legendFormat": "JETTY - BSY",
-          "refId": "D"
-        },
-        {
-          "expr": "jetty_threads_current{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "JETTY - CUR",
           "refId": "E"
         },
         {
-          "expr": "jetty_threads_config_max{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jetty_queued_thread_pool_threads_idle{app_kubernetes_io_instance=~\"^$instance$\"}",
           "format": "time_series",
           "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "JETTY - IDLE",
+          "refId": "D"
+        },
+        {
+          "expr": "jetty_queued_thread_pool_threads_max{app_kubernetes_io_instance=~\"^$instance$\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "JETTY - MAX",
           "refId": "F"
@@ -820,7 +787,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Jetty Utilisation",
+      "title": "Jetty Threads",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -866,25 +833,27 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "decimals": 2,
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 1,
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 17
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 137,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
         "current": true,
         "hideEmpty": false,
-        "hideZero": false,
+        "hideZero": true,
         "max": false,
         "min": false,
+        "rightSide": false,
         "show": true,
         "total": true,
         "values": true
@@ -905,8 +874,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(jetty_responses_total{application=\"$application\", instance=\"$instance\"}[5m])",
-          "legendFormat": "JETTY -  RSP - {{status}}",
+          "expr": "sum by (code,web_cplace_de_fqdn) (rate(jetty_responses_total{app_kubernetes_io_instance=~\"^${instance}$\"}[5m]))",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{web_cplace_de_fqdn}} - HTTP {{code}}",
           "refId": "B"
         }
       ],
@@ -930,8 +902,114 @@
       },
       "yaxes": [
         {
+          "decimals": 1,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": 0,
           "format": "short",
           "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": "Prometheus",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 127,
+      "panels": [],
+      "repeat": null,
+      "title": "JVM Memory",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 29
+      },
+      "hiddenSeries": false,
+      "id": 143,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{app_kubernetes_io_instance=~\"^${instance}$\"}",
+          "interval": "",
+          "legendFormat": "{{kubernetes_pod_name}} - RES",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Process Resident Memory Usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "bytes",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -952,21 +1030,6 @@
       }
     },
     {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 24
-      },
-      "id": 127,
-      "panels": [],
-      "repeat": null,
-      "title": "JVM Memory",
-      "type": "row"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -975,7 +1038,7 @@
       "editable": true,
       "error": false,
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 1,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -988,7 +1051,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 25
+        "y": 37
       },
       "hiddenSeries": false,
       "id": 24,
@@ -1018,8 +1081,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"})",
+          "expr": "avg(jvm_memory_bytes_used{app_kubernetes_io_instance=~\"^${instance}$\",area=\"heap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "used",
           "metric": "",
@@ -1027,16 +1091,18 @@
           "step": 2400
         },
         {
-          "expr": "sum(jvm_memory_committed_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"})",
+          "expr": "avg(jvm_memory_bytes_committed{app_kubernetes_io_instance=~\"^${instance}$\",area=\"heap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "committed",
           "refId": "B",
           "step": 2400
         },
         {
-          "expr": "sum(jvm_memory_max_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"})",
+          "expr": "avg(jvm_memory_bytes_max{app_kubernetes_io_instance=~\"^${instance}$\",area=\"heap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "max",
           "refId": "C",
@@ -1100,7 +1166,7 @@
       "editable": true,
       "error": false,
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 1,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1113,7 +1179,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 25
+        "y": 37
       },
       "hiddenSeries": false,
       "id": 25,
@@ -1143,7 +1209,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"})",
+          "expr": "avg(jvm_memory_bytes_used{app_kubernetes_io_instance=~\"^${instance}$\",area=\"nonheap\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1153,16 +1219,18 @@
           "step": 2400
         },
         {
-          "expr": "sum(jvm_memory_committed_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"})",
+          "expr": "avg(jvm_memory_bytes_committed{app_kubernetes_io_instance=~\"^${instance}$\",area=\"nonheap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "committed",
           "refId": "B",
           "step": 2400
         },
         {
-          "expr": "sum(jvm_memory_max_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"})",
+          "expr": "avg(jvm_memory_bytes_max{app_kubernetes_io_instance=~\"^${instance}$\",area=\"nonheap\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "max",
           "refId": "C",
@@ -1219,12 +1287,12 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 44
       },
       "id": 128,
       "panels": [],
@@ -1238,6 +1306,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "decimals": 1,
       "editable": true,
       "error": false,
       "fill": 1,
@@ -1251,16 +1320,19 @@
         "rightMin": null
       },
       "gridPos": {
-        "h": 7,
-        "w": 6,
+        "h": 6,
+        "w": 12,
         "x": 0,
-        "y": 33
+        "y": 45
       },
       "hiddenSeries": false,
       "id": 106,
       "legend": {
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": true,
         "min": false,
         "show": true,
@@ -1284,29 +1356,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "system_cpu_usage{application=\"$application\", instance=\"$instance\"}",
+          "expr": "rate(process_cpu_seconds_total{app_kubernetes_io_instance=~\"^$instance$\"}[5m])",
           "format": "time_series",
           "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "system",
-          "metric": "",
-          "refId": "A",
-          "step": 2400
-        },
-        {
-          "expr": "process_cpu_usage{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "process",
-          "refId": "B"
-        },
-        {
-          "expr": "avg_over_time(process_cpu_usage{application=\"$application\", instance=\"$instance\"}[1h])",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "process-1h",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{kubernetes_pod_name}}: process-15m",
           "refId": "C"
         }
       ],
@@ -1346,12 +1402,12 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "percentunit",
           "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -1368,124 +1424,7 @@
       "editable": true,
       "error": false,
       "fill": 1,
-      "fillGradient": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 6,
-        "y": 33
-      },
-      "hiddenSeries": false,
-      "id": 93,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "system_load_average_1m{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "system-1m",
-          "metric": "",
-          "refId": "A",
-          "step": 2400
-        },
-        {
-          "expr": "system_cpu_count{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "cpus",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Load",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "decimals": 1,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": 0,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 1,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1498,14 +1437,17 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 40
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 32,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": true,
-        "max": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
         "min": false,
         "show": true,
         "total": false,
@@ -1528,8 +1470,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "jvm_threads_live_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "avg(jvm_threads_current{app_kubernetes_io_instance=~\"^${instance}$\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "live",
           "metric": "",
@@ -1537,8 +1480,9 @@
           "step": 2400
         },
         {
-          "expr": "jvm_threads_daemon_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "avg(jvm_threads_daemon{app_kubernetes_io_instance=~\"^${instance}$\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "daemon",
           "metric": "",
@@ -1546,19 +1490,20 @@
           "step": 2400
         },
         {
-          "expr": "jvm_threads_peak_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "avg(jvm_threads_peak{app_kubernetes_io_instance=~\"^${instance}$\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "peak",
           "refId": "C",
           "step": 2400
         },
         {
-          "expr": "process_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "avg(jvm_threads_deadlocked{app_kubernetes_io_instance=~\"^${instance}$\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "process",
+          "legendFormat": "deadlocked",
           "refId": "D",
           "step": 2400
         }
@@ -1592,7 +1537,7 @@
         {
           "decimals": 0,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": 0,
@@ -1626,21 +1571,21 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 1,
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 40
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 124,
       "legend": {
-        "alignAsTable": false,
+        "alignAsTable": true,
         "avg": false,
         "current": true,
         "hideZero": true,
-        "max": true,
+        "max": false,
         "min": false,
         "rightSide": false,
         "show": true,
@@ -1664,10 +1609,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "jvm_threads_states_threads{application=\"$application\", instance=\"$instance\"}",
+          "expr": "sum by (state,web_cplace_de_fqdn) (jvm_threads_state{app_kubernetes_io_instance=~\"^${instance}$\"})",
           "format": "time_series",
+          "instant": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{state}}",
+          "legendFormat": "{{web_cplace_de_fqdn}} - {{state}}",
           "refId": "A"
         }
       ],
@@ -1691,151 +1638,22 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "debug": "#1F78C1",
-        "error": "#BF1B00",
-        "info": "#508642",
-        "trace": "#6ED0E0",
-        "warn": "#EAB839"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "fillGradient": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 0,
-        "y": 47
-      },
-      "height": "",
-      "hiddenSeries": false,
-      "id": 91,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "hideEmpty": false,
-        "hideZero": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": true,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": true,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "error",
-          "yaxis": 1
-        },
-        {
-          "alias": "warn",
-          "yaxis": 1
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(logback_events_total{application=\"$application\", instance=\"$instance\"}[1m])",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{level}}",
-          "metric": "",
-          "refId": "A",
-          "step": 1200
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Log Events",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
           "decimals": 0,
-          "format": "opm",
-          "label": null,
+          "format": "short",
+          "label": "",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
+          "decimals": null,
           "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -1845,12 +1663,12 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 58
       },
       "id": 131,
       "panels": [],
@@ -1862,28 +1680,34 @@
   "refresh": "30s",
   "schemaVersion": 22,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "cplace",
+    "metrics"
+  ],
   "templating": {
     "list": [
       {
+        "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "cplace",
-          "value": "cplace"
+          "selected": false,
+          "text": "qa",
+          "value": "qa"
         },
         "datasource": "Prometheus",
-        "definition": "",
+        "definition": "label_values(process_start_time_seconds,kubernetes_namespace)",
         "hide": 0,
-        "includeAll": false,
-        "label": "Application",
+        "includeAll": true,
+        "label": "Namespace",
         "multi": false,
-        "name": "application",
+        "multiFormat": "glob",
+        "name": "namespace",
         "options": [],
-        "query": "label_values(application)",
+        "query": "label_values(process_start_time_seconds,kubernetes_namespace)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 5,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -1891,82 +1715,25 @@
         "useTags": false
       },
       {
-        "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "",
-          "value": ""
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
+        "definition": "label_values(process_start_time_seconds{kubernetes_namespace=~\"^${namespace}\"}, app_kubernetes_io_instance) ",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Instance",
         "multi": false,
-        "multiFormat": "glob",
         "name": "instance",
         "options": [],
-        "query": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
+        "query": "label_values(process_start_time_seconds{kubernetes_namespace=~\"^${namespace}\"}, app_kubernetes_io_instance) ",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allFormat": "glob",
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "",
-        "hide": 0,
-        "includeAll": true,
-        "label": "JVM Memory Pools Heap",
-        "multi": false,
-        "multiFormat": "glob",
-        "name": "jvm_memory_pool_heap",
-        "options": [],
-        "query": "label_values(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"},id)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allFormat": "glob",
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "",
-        "hide": 0,
-        "includeAll": true,
-        "label": "JVM Memory Pools Non-Heap",
-        "multi": false,
-        "multiFormat": "glob",
-        "name": "jvm_memory_pool_nonheap",
-        "options": [],
-        "query": "label_values(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"},id)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 2,
+        "sort": 5,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -1976,7 +1743,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -2008,5 +1775,5 @@
   "timezone": "browser",
   "title": "cplace Application Metrics",
   "uid": null,
-  "version": 1
+  "version": 2
 }
